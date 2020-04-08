@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 void main() => runApp(MyApp());
 
@@ -26,66 +25,44 @@ class MyHomePage extends StatelessWidget {
         height: double.infinity,
         child: Stack(
           children: <Widget>[
-            _buildWidgetContent(heightScreen),
-            Container(
-              color: Colors.black.withOpacity(0.1),
-              width: double.infinity,
-              height: paddingTop + 36,
-              child: BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 5,
-                  sigmaY: 5,
+            Column(
+              children: <Widget>[
+                Expanded(
+                  child: Stack(
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/images/img_dessert.jpg',
+                        fit: BoxFit.cover,
+                        height: heightScreen / 2,
+                      ),
+                      ContainerBlack(heightScreen: heightScreen),
+                    ],
+                  ),
                 ),
+                Expanded(
+                  child: Stack(
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/images/img_polar_light.jpg',
+                        fit: BoxFit.cover,
+                        height: heightScreen / 2,
+                      ),
+                      ContainerBlack(heightScreen: heightScreen),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: WavyImage(
+                'assets/images/img_tree_beach.jpg',
               ),
             ),
+
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildWidgetContent(double heightScreen) {
-    return ListView(
-      padding: EdgeInsets.zero,
-      children: <Widget>[
-        Stack(
-          children: <Widget>[
-            Positioned(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 570.0),
-                child: Stack(
-                  children: <Widget>[
-                    Image.asset(
-                      'assets/images/img_polar_light.jpg',
-                      fit: BoxFit.cover,
-                      height: heightScreen / 2,
-                    ),
-                    Container(
-                      color: Colors.black.withOpacity(0.5),
-                      height: heightScreen / 2,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 380),
-                child: WavyImage('assets/images/img_dessert.jpg'),
-              ),
-            ),
-            Positioned(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 190.0),
-                child: WavyImage('assets/images/img_polar_light.jpg'),
-              ),
-            ),
-            Positioned(
-              child: WavyImage('assets/images/img_dessert.jpg'),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }
@@ -107,10 +84,7 @@ class WavyImage extends StatelessWidget {
             fit: BoxFit.cover,
             height: heightScreen / 2,
           ),
-          Container(
-            color: Colors.black.withOpacity(0.5),
-            height: heightScreen / 2,
-          ),
+          ContainerBlack(heightScreen: heightScreen),
         ],
       ),
       clipper: WaveClipper(),
@@ -122,45 +96,10 @@ class WaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path();
-    /*path.lineTo(0, size.height - 20);
 
-    double dxFirstControlPoint = size.width / 4;
-    double dyFirstControlPoint = size.height;
-    double dxFirstEndPoint = size.width / 2.25;
-    double dyFirstEndpoint = size.height - 30;
-    print('FirstControlPoint dx: $dxFirstControlPoint & dy: $dyFirstControlPoint');
-    print('FirstEndPoint dx: $dxFirstEndPoint & dy: $dyFirstEndpoint');
-    var firstControlPoint = Offset(dxFirstControlPoint, dyFirstControlPoint);
-    var firstEndPoint = Offset(dxFirstEndPoint, dyFirstEndpoint);
-    path.quadraticBezierTo(
-      firstControlPoint.dx,
-      firstControlPoint.dy,
-      firstEndPoint.dx,
-      firstEndPoint.dy,
-    );
-
-    double dxSecondControlPoint = size.width - (size.width / 3.25);
-    double dySecondControlPoint = size.height - 65;
-    double dxSecondEndPoint = size.width;
-    double dySecondEndPoint = size.height - 40;
-    print('SecondControlPoint dx: $dxSecondControlPoint & dy: $dySecondControlPoint');
-    print('SecondEndPoint dx: $dxSecondEndPoint & dy: $dySecondEndPoint');
-    var secondControlPoint = Offset(dxSecondControlPoint, dySecondControlPoint);
-    var secondEndPoint = Offset(dxSecondEndPoint, dySecondEndPoint);
-    path.quadraticBezierTo(
-      secondControlPoint.dx,
-      secondControlPoint.dy,
-      secondEndPoint.dx,
-      secondEndPoint.dy,
-    );
-
-    path.lineTo(size.width, size.height - 40);
-    path.lineTo(size.width, 0);*/
-
-    // benar
-    path.lineTo(0, size.height - 140);
-    var firstControlPoint = Offset(0, size.height - 100);
-    var firstEndPoint = Offset(30, size.height - 90);
+    path.lineTo(0, size.height - 200);
+    var firstControlPoint = Offset(0, size.height - 160);
+    var firstEndPoint = Offset(30, size.height - 150);
     path.quadraticBezierTo(
       firstControlPoint.dx,
       firstControlPoint.dy,
@@ -177,17 +116,50 @@ class WaveClipper extends CustomClipper<Path> {
       secondEndPoint.dx,
       secondEndPoint.dy,
     );
-    // benar
 
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, 0);
+    path.lineTo(size.width, 200);
+    var thirdControlPoint = Offset(size.width, 140);
+    var thirdEndPoint = Offset(size.width - 30, 150);
+    path.quadraticBezierTo(
+      thirdControlPoint.dx,
+      thirdControlPoint.dy,
+      thirdEndPoint.dx,
+      thirdControlPoint.dy,
+    );
+
+    path.lineTo(30, 50);
+    var fourthControlPoint = Offset(0, 40);
+    var fourthEndPoint = Offset(0, 0);
+    path.quadraticBezierTo(
+      fourthControlPoint.dx,
+      fourthControlPoint.dy,
+      fourthEndPoint.dx,
+      fourthEndPoint.dy,
+    );
+
     path.close();
-
     return path;
   }
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;
+  }
+}
+
+class ContainerBlack extends StatelessWidget {
+  const ContainerBlack({
+    Key key,
+    @required this.heightScreen,
+  }) : super(key: key);
+
+  final double heightScreen;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: heightScreen / 2,
+      color: Colors.black.withOpacity(0.5),
+    );
   }
 }
