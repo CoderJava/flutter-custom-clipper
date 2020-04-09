@@ -25,14 +25,15 @@ class WavyImageClipper extends CustomClipper<Path> {
       secondEndPoint.dy,
     );
 
-    path.lineTo(size.width, 200);
-    var thirdControlPoint = Offset(size.width, 140);
-    var thirdEndPoint = Offset(size.width - 30, 150);
+    var dyThird = 200.0;
+    path.lineTo(size.width, dyThird);
+    var thirdControlPoint = Offset(size.width, dyThird - 40);
+    var thirdEndPoint = Offset(size.width - 30, dyThird - 50);
     path.quadraticBezierTo(
       thirdControlPoint.dx,
       thirdControlPoint.dy,
       thirdEndPoint.dx,
-      thirdControlPoint.dy,
+      thirdEndPoint.dy,
     );
 
     path.lineTo(30, 50);
