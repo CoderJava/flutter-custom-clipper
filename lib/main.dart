@@ -34,7 +34,7 @@ class MyHomePage extends StatelessWidget {
                   child: Stack(
                     children: <Widget>[
                       Image.asset(
-                        'assets/images/img_dessert.jpg',
+                        'assets/images/img_scenic_mountain.jpg',
                         fit: BoxFit.cover,
                         height: heightScreen / 2,
                       ),
@@ -46,7 +46,7 @@ class MyHomePage extends StatelessWidget {
                   child: Stack(
                     children: <Widget>[
                       Image.asset(
-                        'assets/images/img_polar_light.jpg',
+                        'assets/images/img_water_drop.jpg',
                         fit: BoxFit.cover,
                         height: heightScreen / 2,
                       ),
@@ -59,57 +59,71 @@ class MyHomePage extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: WavyImage(
-                'assets/images/img_tree_beach.jpg',
+                'assets/images/img_peaceful_piano.jpg',
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: paddingTop,
-                bottom: paddingBottom,
-              ),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        'Meditation',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'MazzardSemiBold',
-                          fontSize: 36,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        'Daydream',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'MazzardSemiBold',
-                          fontSize: 36,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        'Sensations',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'MazzardSemiBold',
-                          fontSize: 36,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            _buildWidgetColumnText(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildWidgetColumnText() {
+    return Center(
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _buildWidgetTitle('Meditation'),
+                _buildWidgetSubtitle('Breathe, Sense, Feel'),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _buildWidgetTitle('Piano'),
+                _buildWidgetSubtitle('Relax and indulge'),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _buildWidgetTitle('Calm'),
+                _buildWidgetSubtitle('Slow down and relax'),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWidgetTitle(String text) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: Colors.white,
+        fontFamily: 'MazzardSemiBold',
+        fontSize: ScreenUtil().setSp(128),
+      ),
+    );
+  }
+
+  Widget _buildWidgetSubtitle(String text) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: Colors.white70,
+        fontFamily: 'MazzardSemiBold',
+        fontSize: ScreenUtil().setSp(42),
+        height: ScreenUtil().setHeight(1),
       ),
     );
   }
