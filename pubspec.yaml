@@ -13,6 +13,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
+  # A flutter plugin for adapting screen and font size.
+  flutter_screenutil: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -46,6 +49,10 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+  fonts:
+    - family: MazzardSemiBold
+      fonts:
+        - asset: assets/fonts/MazzardL_SemiBold.otf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

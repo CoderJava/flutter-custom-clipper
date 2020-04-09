@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,9 +17,11 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double heightScreen = mediaQueryData.size.height;
     double paddingTop = mediaQueryData.padding.top;
+    double paddingBottom = mediaQueryData.padding.bottom;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -59,7 +62,52 @@ class MyHomePage extends StatelessWidget {
                 'assets/images/img_tree_beach.jpg',
               ),
             ),
-
+            Padding(
+              padding: EdgeInsets.only(
+                top: paddingTop,
+                bottom: paddingBottom,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        'Meditation',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'MazzardSemiBold',
+                          fontSize: 36,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        'Daydream',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'MazzardSemiBold',
+                          fontSize: 36,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        'Sensations',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'MazzardSemiBold',
+                          fontSize: 36,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -74,17 +122,17 @@ class WavyImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double heightScreen = mediaQueryData.size.height;
     return ClipPath(
       child: Stack(
         children: <Widget>[
           Image.asset(
             img,
             fit: BoxFit.cover,
-            height: heightScreen / 2,
+            height: 1150.w,
           ),
-          ContainerBlack(heightScreen: heightScreen),
+          ContainerBlack(
+            heightScreen: 1150.w,
+          ),
         ],
       ),
       clipper: WaveClipper(),
@@ -158,7 +206,7 @@ class ContainerBlack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: heightScreen / 2,
+      height: heightScreen,
       color: Colors.black.withOpacity(0.5),
     );
   }
