@@ -1,6 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_meditation_app/wavy/wavy_bottom_navigation_bar.dart';
+import 'package:flutter_meditation_app/wavy/wavy_image.dart';
+import 'package:flutter_meditation_app/widgets/container_black.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() => runApp(MyApp());
@@ -20,8 +23,6 @@ class MyHomePage extends StatelessWidget {
     ScreenUtil.init(context);
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double heightScreen = mediaQueryData.size.height;
-    double paddingTop = mediaQueryData.padding.top;
-    double paddingBottom = mediaQueryData.padding.bottom;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -63,6 +64,62 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             _buildWidgetColumnText(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: WavyBottomNavigationBar(),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 100.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      width: 150.w,
+                      height: 150.w,
+                      child: Icon(
+                        Icons.bubble_chart,
+                        color: Colors.white.withOpacity(0.5),
+                        size: ScreenUtil().setWidth(96),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.grey[800],
+                          width: 2,
+                        ),
+                      ),
+                      width: 150.w,
+                      height: 150.w,
+                      child: Icon(
+                        Icons.image,
+                        color: Colors.grey[900],
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      width: 150.w,
+                      height: 150.w,
+                      child: Icon(
+                        Icons.brightness_3,
+                        color: Colors.white.withOpacity(0.5),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -92,12 +149,15 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _buildWidgetTitle('Calm'),
-                _buildWidgetSubtitle('Slow down and relax'),
-              ],
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 200.w),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _buildWidgetTitle('Calm'),
+                  _buildWidgetSubtitle('Slow down and relax'),
+                ],
+              ),
             ),
           ),
         ],
@@ -125,103 +185,6 @@ class MyHomePage extends StatelessWidget {
         fontSize: ScreenUtil().setSp(42),
         height: ScreenUtil().setHeight(1),
       ),
-    );
-  }
-}
-
-class WavyImage extends StatelessWidget {
-  final String img;
-
-  WavyImage(this.img);
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipPath(
-      child: Stack(
-        children: <Widget>[
-          Image.asset(
-            img,
-            fit: BoxFit.cover,
-            height: 1150.w,
-          ),
-          ContainerBlack(
-            heightScreen: 1150.w,
-          ),
-        ],
-      ),
-      clipper: WaveClipper(),
-    );
-  }
-}
-
-class WaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-
-    path.lineTo(0, size.height - 200);
-    var firstControlPoint = Offset(0, size.height - 160);
-    var firstEndPoint = Offset(30, size.height - 150);
-    path.quadraticBezierTo(
-      firstControlPoint.dx,
-      firstControlPoint.dy,
-      firstEndPoint.dx,
-      firstEndPoint.dy,
-    );
-
-    path.lineTo(size.width - 30, size.height - 50);
-    var secondControlPoint = Offset(size.width, size.height - 40);
-    var secondEndPoint = Offset(size.width, size.height);
-    path.quadraticBezierTo(
-      secondControlPoint.dx,
-      secondControlPoint.dy,
-      secondEndPoint.dx,
-      secondEndPoint.dy,
-    );
-
-    path.lineTo(size.width, 200);
-    var thirdControlPoint = Offset(size.width, 140);
-    var thirdEndPoint = Offset(size.width - 30, 150);
-    path.quadraticBezierTo(
-      thirdControlPoint.dx,
-      thirdControlPoint.dy,
-      thirdEndPoint.dx,
-      thirdControlPoint.dy,
-    );
-
-    path.lineTo(30, 50);
-    var fourthControlPoint = Offset(0, 40);
-    var fourthEndPoint = Offset(0, 0);
-    path.quadraticBezierTo(
-      fourthControlPoint.dx,
-      fourthControlPoint.dy,
-      fourthEndPoint.dx,
-      fourthEndPoint.dy,
-    );
-
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return true;
-  }
-}
-
-class ContainerBlack extends StatelessWidget {
-  const ContainerBlack({
-    Key key,
-    @required this.heightScreen,
-  }) : super(key: key);
-
-  final double heightScreen;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: heightScreen,
-      color: Colors.black.withOpacity(0.5),
     );
   }
 }
