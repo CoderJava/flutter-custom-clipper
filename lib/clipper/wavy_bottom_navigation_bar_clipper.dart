@@ -1,73 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WavyBottomNavigationBarClipper extends CustomClipper<Path> {
+
   @override
   Path getClip(Size size) {
     Path path = Path();
+    path.lineTo(0, 0);
 
-    path.lineTo(0, 2);
-    path.lineTo(10, 3);
-    path.lineTo(15, 5);
-    path.lineTo(20, 10);
-    var firstControlPoint = Offset((size.width / 3.6) - 40, 60);
-    var firstEndPoint = Offset(size.width / 3.6, 10);
+    var zeroControlPoint = Offset(((size.width / 10) - 30.w) / 2, 0);
+    var zeroEndPoint = Offset((size.width / 10) - 30.w, 35.w);
+    path.quadraticBezierTo(
+      zeroControlPoint.dx,
+      zeroControlPoint.dy,
+      zeroEndPoint.dx,
+      zeroEndPoint.dy,
+    );
+
+    path.lineTo(size.width / 10 - 30.w, 35.w);
+    var firstControlPoint = Offset((size.width / 10) + 75.w, 160.w);
+    var firstEndPoint = Offset((size.width / 10) + 150.w + 20.w, 35.w);
     path.quadraticBezierTo(
       firstControlPoint.dx,
       firstControlPoint.dy,
       firstEndPoint.dx,
       firstEndPoint.dy,
     );
-    path.lineTo(size.width / 3.6, 10);
+    path.lineTo((size.width / 10) + 150.w + 20.w, 35.w);
 
-    var dxSecondEndPoint = size.width / 3;
-    var secondControlPoint = Offset(dxSecondEndPoint + 5, -10);
-    var secondEndPoint = Offset(dxSecondEndPoint + 25, 10);
+    double widthMiddleEndPoint = size.width / 2;
+    double temp1 = (size.width / 10) + 150.w + 20.w;
+    double temp2 = widthMiddleEndPoint - 75.w - 20.w;
+    double dxFirstMiddleControlPoint = temp1 + ((temp2 - temp1).abs() / 2);
+    var firstMiddleControlPoint = Offset(dxFirstMiddleControlPoint, -20.w);
+    var firstMiddleEndPoint = Offset(temp2, 35.w);
     path.quadraticBezierTo(
-      secondControlPoint.dx,
-      secondControlPoint.dy,
-      secondEndPoint.dx,
-      secondEndPoint.dy,
+      firstMiddleControlPoint.dx,
+      firstMiddleControlPoint.dy,
+      firstMiddleEndPoint.dx,
+      firstMiddleEndPoint.dy,
     );
-    path.lineTo(dxSecondEndPoint + 25, 10);
+    path.lineTo(dxFirstMiddleControlPoint, 0);
 
-    var dxThirdEndPoint = size.width - (size.width / 2.5);
-    var thirdControlPoint = Offset(dxThirdEndPoint - 36, 60);
-    var thirdEndPoint = Offset((size.width / 3) * 2 - 25, 10);
+    path.lineTo(widthMiddleEndPoint - 75.w - 20.w, 35.w);
+    var middleControlPoint = Offset(widthMiddleEndPoint, 160.w);
+    var middleEndPoint = Offset(widthMiddleEndPoint + 75.w + 20.w, 35.w);
     path.quadraticBezierTo(
-      thirdControlPoint.dx,
-      thirdControlPoint.dy,
-      thirdEndPoint.dx,
-      thirdEndPoint.dy,
+      middleControlPoint.dx,
+      middleControlPoint.dy,
+      middleEndPoint.dx,
+      middleEndPoint.dy,
     );
+    path.lineTo(widthMiddleEndPoint + 75.w + 20.w, 35.w);
 
-    var dxFourthEndPoint = (size.width / 3) * 2;
-    var fourthControlPoint = Offset(dxFourthEndPoint + 5, -10);
-    var fourthEndPoint = Offset(dxFourthEndPoint + 25, 10);
+    double widthLastEndPoint = size.width - ((size.width / 10) + 150.w + 20.w);
+    double widthLastEndPoint2 = size.width - ((size.width / 10) - 30.w);
+    double temp3 = widthMiddleEndPoint + 75.w + 20.w;
+    double temp4 = widthLastEndPoint;
+    double dxLastMiddleControlPoint = temp3 + ((temp4 - temp3).abs() / 2);
+    var lastMiddleControlPoint = Offset(dxLastMiddleControlPoint, -20.w);
+    var lastMiddleEndPoint = Offset(temp4, 35.w);
     path.quadraticBezierTo(
-      fourthControlPoint.dx,
-      fourthControlPoint.dy,
-      fourthEndPoint.dx,
-      fourthEndPoint.dy,
+      lastMiddleControlPoint.dx,
+      lastMiddleControlPoint.dy,
+      lastMiddleEndPoint.dx,
+      lastMiddleEndPoint.dy,
     );
+    path.lineTo(widthLastEndPoint, 35.w);
 
-    var dxFifthEndPoint = size.width - ((size.width / 3.6) - 40);
-    var fifthControlPoint = Offset(dxFifthEndPoint, 60);
-    var fifthEndPoint = Offset(dxFifthEndPoint + 40, 10);
+    var lastControlPoint = Offset(size.width - ((size.width / 10) + 75.w), 160.w);
+    var lastEndPoint = Offset(widthLastEndPoint2, 35.w);
     path.quadraticBezierTo(
-      fifthControlPoint.dx,
-      fifthControlPoint.dy,
-      fifthEndPoint.dx,
-      fifthEndPoint.dy,
+      lastControlPoint.dx,
+      lastControlPoint.dy,
+      lastEndPoint.dx,
+      lastEndPoint.dy,
+    );
+    path.lineTo(widthLastEndPoint2, 35.w);
+
+    double widthLastEndPoint3 = size.width - (((size.width / 10) - 30.w) / 2);
+    var lastControlPoint2 = Offset(widthLastEndPoint3, 0);
+    var lastEndPoint2 = Offset(size.width, 0.w);
+    path.quadraticBezierTo(
+      lastControlPoint2.dx,
+      lastControlPoint2.dy,
+      lastEndPoint2.dx,
+      lastEndPoint2.dy,
     );
 
-    path.lineTo(size.width - 20, 10);
-    path.lineTo(size.width - 15, 5);
-    path.lineTo(size.width - 10, 3);
-    path.lineTo(size.width, 2);
+    path.lineTo(size.width, 0);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
     path.close();
-
     return path;
   }
 
