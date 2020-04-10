@@ -8,8 +8,8 @@ class WavyBottomNavigationBar extends StatelessWidget {
     ScreenUtil.init(context);
     return ClipPath(
       child: Container(
-        color: Colors.white,
-        height: 180.w,
+        color: Colors.black.withOpacity(0.5),
+        height: 180.w + ScreenUtil.bottomBarHeight,
       ),
       clipper: WavyBottomNavigationBarClipper(),
     );

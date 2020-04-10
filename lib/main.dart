@@ -71,57 +71,65 @@ class MyHomePage extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: EdgeInsets.only(bottom: 100.w),
+                padding: EdgeInsets.only(bottom: 100.w + ScreenUtil.bottomBarHeight),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
-                        shape: BoxShape.circle,
-                      ),
-                      width: 150.w,
-                      height: 150.w,
-                      child: Icon(
-                        Icons.bubble_chart,
-                        color: Colors.white.withOpacity(0.5),
-                        size: ScreenUtil().setWidth(96),
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.grey[800],
-                          width: 2,
-                        ),
-                      ),
-                      width: 150.w,
-                      height: 150.w,
-                      child: Icon(
-                        Icons.image,
-                        color: Colors.grey[900],
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
-                        shape: BoxShape.circle,
-                      ),
-                      width: 150.w,
-                      height: 150.w,
-                      child: Icon(
-                        Icons.brightness_3,
-                        color: Colors.white.withOpacity(0.5),
-                      ),
-                    ),
+                    _buildWidgetCircleMenu(Icons.bubble_chart, false),
+                    _buildWidgetCircleMenu(Icons.accessibility_new, true),
+                    _buildWidgetCircleMenu(Icons.brightness_3, false),
+                  ],
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  bottom: ScreenUtil.bottomBarHeight > 0 ? ScreenUtil.bottomBarHeight : 24.w,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    _buildWidgetTextMenuCircle('Focus', false),
+                    _buildWidgetTextMenuCircle('Relax', true),
+                    _buildWidgetTextMenuCircle('Sleep', false),
                   ],
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildWidgetTextMenuCircle(String text, bool isActive) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: isActive ? Colors.white : Colors.grey[800],
+      ),
+    );
+  }
+
+  Widget _buildWidgetCircleMenu(IconData iconData, bool isActive) {
+    return Container(
+      decoration: BoxDecoration(
+        color: isActive ? Colors.white : Colors.white.withOpacity(0.1),
+        shape: BoxShape.circle,
+        border: isActive
+            ? Border.all(
+                color: Colors.grey[800],
+                width: 2,
+              )
+            : null,
+      ),
+      width: 150.w,
+      height: 150.w,
+      child: Icon(
+        iconData,
+        color: isActive ? Colors.grey[900] : Colors.white.withOpacity(0.5),
       ),
     );
   }
