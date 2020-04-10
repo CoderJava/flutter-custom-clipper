@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_meditation_app/wavy/wavy_app_bar.dart';
 import 'package:flutter_meditation_app/wavy/wavy_bottom_navigation_bar.dart';
 import 'package:flutter_meditation_app/wavy/wavy_image.dart';
 import 'package:flutter_meditation_app/widgets/container_black.dart';
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
   }
@@ -98,6 +100,96 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
             ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: WavyAppBar(),
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: EdgeInsets.only(top: ScreenUtil.statusBarHeight + 50.w),
+                child: Container(
+                  width: 128.w,
+                  height: 128.w,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 2,
+                    ),
+                    image: DecorationImage(
+                      image: AssetImage(
+                        'assets/images/img_avatar.jpg',
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: EdgeInsets.only(top: ScreenUtil.statusBarHeight),
+                child: Container(
+                  width: double.infinity,
+                  height: 100.w,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Icon(
+                        Icons.wifi_tethering,
+                        color: Colors.white,
+                        size: 48.w,
+                      ),
+                      Container(),
+                      Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: Icon(
+                              Icons.notifications,
+                              color: Colors.white,
+                              size: 48.w,
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                left: 24.w,
+                                bottom: 28.w,
+                              ),
+                              child: Container(
+                                width: 32.w,
+                                height: 32.w,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(2),
+                                    child: Text(
+                                      '1',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20.sp,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -139,12 +231,15 @@ class MyHomePage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _buildWidgetTitle('Meditation'),
-                _buildWidgetSubtitle('Breathe, Sense, Feel'),
-              ],
+            child: Padding(
+              padding: EdgeInsets.only(top: ScreenUtil.statusBarHeight + 40.w),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _buildWidgetTitle('Meditation'),
+                  _buildWidgetSubtitle('Breathe, Sense, Feel'),
+                ],
+              ),
             ),
           ),
           Expanded(
@@ -158,7 +253,7 @@ class MyHomePage extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(bottom: 200.w),
+              padding: EdgeInsets.only(bottom: ScreenUtil.bottomBarHeight + 200.w),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
